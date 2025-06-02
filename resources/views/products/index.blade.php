@@ -30,7 +30,7 @@
                 <span class="badge bg-secondary">{{ $color->name }}</span>
                 @endforeach
             </td>
-            <td>{{ number_format($product->price, 2) }} kn</td>
+            <td>{{ number_format($product->price, 2) }} km</td>
             <td>
                 <a href="{{ route('products.show', $product) }}" class="btn btn-info btn-sm">View</a>
                 <a href="{{ route('products.edit', $product) }}" class="btn btn-primary btn-sm">Edit</a>

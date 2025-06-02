@@ -27,7 +27,7 @@
             <textarea name="description" class="form-control" id="description">{{ old('description', $product->description) }}</textarea>
         </div>
         <div class="mb-3">
-            <label for="price" class="form-label">Price (kn)</label>
+            <label for="price" class="form-label">Price (km)</label>
             <input type="number" step="0.01" min="0" name="price" class="form-control" id="price" value="{{ old('price', $product->price) }}" required>
         </div>
         <div class="mb-3">
