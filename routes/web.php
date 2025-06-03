@@ -2,11 +2,30 @@
 
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
+use Laravel\Socialite\Facades\Socialite;
 use Illuminate\Http\Request;
 use App\Http\Controllers\ProductController;
 use \App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ColorController;
 use App\Models\User;
+
+Route::get('/auth/google', function () {
+    return Socialite::driver('google')->redirect();
+})->name('google.login');
+
+Route::get('/auth/google/callback', function () {
+    $googleUser = Socialite::driver('google')->stateless()->user();
+
+    $user = User::where('email', $googleUser->getEmail())->first();
+
+    if (!$user) {
+        return redirect('/login')->withErrors(['msg' => 'Pristup dopušten samo ovlaštenim korisnicima.']);
+    }
+
+    Auth::login($user);
+
+    return redirect('/dashboard'); // ili neka tvoja početna stranica
+});
 
 Route::get('/', function () {
     return view('welcome');
@@ -101,3 +120,4 @@ Route::get('/dashboard', fn() => view('dashboard'))->name('dashboard');
 
 
     });
+
